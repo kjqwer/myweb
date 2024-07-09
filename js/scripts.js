@@ -5,6 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
     addExpandFunctionality();
     // 添加切换主题功能
     addThemeToggleFunctionality();
+    loadStylesheet('css/styles.css');
+    
+    function loadStylesheet(url) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = url + '?v=' + new Date().getTime(); // 自动添加时间戳
+        document.head.appendChild(link);
+    }
 
     function addSearchFunctionality() {
         // 搜索功能网页
