@@ -1,3 +1,4 @@
+/* 默认浅色主题 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -48,4 +49,25 @@ footer {
     margin: 1em 0;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 深色主题 */
+body.dark-theme {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-theme header {
+    background-color: #222;
+}
+
+body.dark-theme footer {
+    background-color: #222;
+}
+
+body.dark-theme .intro, 
+body.dark-theme .function-list, 
+body.dark-theme .navigation-list {
+    background-color: #444;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }

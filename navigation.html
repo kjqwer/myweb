@@ -9,6 +9,7 @@
 <body>
     <header>
         <h1>网址导航</h1>
+        <button id="themeToggleBtn">切换主题</button>
         <nav>
             <ul>
                 <li><a href="index.html">首页</a></li>
@@ -20,15 +21,29 @@
     <main>
         <section class="navigation-list">
             <h2>常用网址</h2>
-            <ul>
-                <li><a href="https://www.google.com" target="_blank">Google</a></li>
-                <li><a href="https://www.github.com" target="_blank">GitHub</a></li>
-                <!-- 更多网址链接 -->
+            <input type="text" id="searchNav" placeholder="搜索网址...">
+            <ul id="navList">
+                <li>
+                    <a href="https://www.google.com" target="_blank">Google</a>
+                    <button class="expand-btn">展开</button>
+                    <div class="expandable-content" style="display: none;">
+                        <p>这是 Google 的更多信息。</p>
+                    </div>
+                </li>
+                <li>
+                    <a href="https://www.github.com" target="_blank">GitHub</a>
+                    <button class="expand-btn">展开</button>
+                    <div class="expandable-content" style="display: none;">
+                        <p>这是 GitHub 的更多信息。</p>
+                    </div>
+                </li>
+                <!-- 直接在这里嵌入更多网址数据 -->
             </ul>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 我的功能网页和网址导航</p>
     </footer>
+    <script src="js/scripts.js"></script>
 </body>
 </html>

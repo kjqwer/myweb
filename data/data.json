@@ -1,0 +1,10 @@
+{
+    "functionPages": [
+        {"name": "功能网页1", "url": "pages/page1.html"},
+        {"name": "功能网页2", "url": "pages/page2.html"}
+    ],
+    "navigationLinks": [
+        {"name": "Google", "url": "https://www.google.com"},
+        {"name": "GitHub", "url": "https://www.github.com"}
+    ]
+}
