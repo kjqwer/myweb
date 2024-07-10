@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,56 +7,40 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
+            background-color: #f4f4f9;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
         .container {
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
             border-radius: 8px;
-            padding: 20px;
-            max-width: 600px;
-            width: 100%;
-            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            text-align: center;
             color: #333;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin: 10px 0 5px;
-            color: #555;
-        }
-        textarea, select, button {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        label, select, textarea, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 1rem;
         }
         button {
             background-color: #007BFF;
             color: #fff;
             border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
             cursor: pointer;
         }
         button:hover {
             background-color: #0056b3;
         }
-        .result {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e9ecef;
-            border-radius: 4px;
-            color: #333;
+        #response {
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -64,8 +48,8 @@
     <div class="container">
         <h1>翻译页面</h1>
         <form id="translationForm">
-            <label for="text">文本：</label><br>
-            <textarea id="text" name="text" rows="4" cols="50"></textarea><br>
+            <label for="text">文本：</label>
+            <textarea id="text" name="text" rows="4" cols="50" required></textarea>
             <label for="sourceLang">源语言：</label>
             <select id="sourceLang" name="sourceLang">
                 <option value="auto">自动</option>
@@ -78,7 +62,7 @@
                 <option value="spa">西班牙语</option>
                 <option value="wyw">文言文</option>
                 <!-- 添加更多语言选项 -->
-            </select><br><br>
+            </select>
             <label for="targetLang">目标语言：</label>
             <select id="targetLang" name="targetLang">
                 <option value="en">英语</option>
@@ -90,36 +74,28 @@
                 <option value="spa">西班牙语</option>
                 <option value="wyw">文言文</option>
                 <!-- 添加更多语言选项 -->
-            </select><br><br>
+            </select>
             <button type="submit">翻译</button>
         </form>
-        <div id="translationResult" class="result"></div> <!-- 显示翻译结果 -->
+        <p id="response"></p>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- 引入 Axios -->
+
     <script>
-        document.getElementById('translationForm').addEventListener('submit', async function(event) {
+        document.getElementById('translationForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
             const text = document.getElementById('text').value;
             const sourceLang = document.getElementById('sourceLang').value;
             const targetLang = document.getElementById('targetLang').value;
 
-            try {
-                const response = await axios.get('http://localhost:3001/translate/dir', {
-                    params: {
-                        text: text,
-                        sourceLang: sourceLang,
-                        targetLang: targetLang
-                    },
-                });
-                
-                const translation = response.data.translation;
-                document.getElementById('translationResult').innerText = '翻译结果: ' + translation;
-            } catch (error) {
-                console.error('翻译失败：', error.message);
-                document.getElementById('translationResult').innerText = '翻译失败: ' + error.message;
-            }
+            fetch(`https://syweb.online/api/translate?text=${encodeURIComponent(text)}&sourceLang=${sourceLang}&targetLang=${targetLang}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').textContent = data.translation;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('response').textContent = '翻译失败';
+            });
         });
     </script>
 </body>
